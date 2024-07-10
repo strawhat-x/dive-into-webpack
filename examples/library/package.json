@@ -2,9 +2,15 @@
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:umd": "webpack --config config/webpack-umd.config.js",
+    "build:var": "webpack --config config/webpack-var.config.js",
+    "build:cmd": "webpack --config config/webpack-cmd.config.js",
+    "build:self": "webpack --config config/webpack-self.config.js",
+    "build:win": "webpack --config config/webpack-win.config.js",
+    "build": "pnpm run build:umd & pnpm run build:var & pnpm run build:cmd"
   },
   "keywords": [],
   "author": "strawhat <strawhat.x@qq.com>",
