@@ -2,6 +2,8 @@ import { realpathSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+process.env.NODE_ENV = 'development';
+
 // current dirname
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 // node cwd( current working directory ), where the command executed.
@@ -17,9 +19,10 @@ export default {
   output: {
     clean: true,
   },
+  devtool: 'source-map',
   optimization: {
     minimize: false,
-  },
+  }
 };
 
 /** ******* multiple entries generate one file ******* */

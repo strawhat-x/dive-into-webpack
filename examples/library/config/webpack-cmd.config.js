@@ -1,7 +1,7 @@
 import { realpathSync } from 'node:fs';
 import path from 'node:path';
 
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 
 const appDir = realpathSync(process.cwd());
 const resolveApp = (relativePath = '.') => path.resolve(appDir, relativePath);
@@ -15,8 +15,5 @@ export default {
       name: 'MyLibrary',
       type: 'commonjs2',
     },
-  },
-  optimization: {
-    minimize: false,
   },
 }
