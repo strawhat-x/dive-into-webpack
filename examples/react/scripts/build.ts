@@ -1,11 +1,10 @@
 import webpack from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
 import createConfig from '../config/webpack.config';
 
 
-const DEV_ENV = 'development';
-process.env.NODE_ENV = DEV_ENV;
-process.env.BABEL_ENV = DEV_ENV;
+const PRO_ENV = 'production';
+process.env.NODE_ENV = PRO_ENV;
+process.env.BABEL_ENV = PRO_ENV;
 
 // webpack(config, (err, stats) => {
 //   if (err) {
@@ -22,14 +21,8 @@ process.env.BABEL_ENV = DEV_ENV;
 //   }
 // });
 
-const compiler = webpack(createConfig(DEV_ENV));
-
-const devServer = new WebpackDevServer({
-  client: {
-    overlay: {
-      warnings: false,
-    }
+webpack(createConfig(PRO_ENV), (err) => {
+  if (err) {
+    console.log(err);
   }
-}, compiler);
-
-devServer.start();
+});

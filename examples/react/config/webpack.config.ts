@@ -10,33 +10,41 @@ const paths = {
   appIndex: resolveApp('src/index.tsx'),
 };
 
-export default {
-  entry: paths.appIndex,
-  output: {
-    path: resolveApp('dist'),
-    filename: 'app.[contenthash:8].js',
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '...'],
-  },
-  module: {
-    rules: [
-      {
-        oneOf: [
-          {
-            test: /\.(tsx|ts|jsx|js)$/,
-            loader: 'babel-loader',
-          },
-        ],
-      },
+export default function (env: string) {
+  const isProduction = env === 'production';
+
+  return {
+    mode: env,
+    entry: {
+      app: paths.appIndex,
+    },
+    output: {
+      clean: true,
+      path: resolveApp('dist'),
+      filename: isProduction ? '[name].[contenthash:8].js' : '[name].js',
+    },
+    resolve: {
+      extensions: ['.ts', '.tsx', '...'],
+    },
+    module: {
+      rules: [
+        {
+          oneOf: [
+            {
+              test: /\.(tsx|ts|jsx|js)$/,
+              loader: 'babel-loader',
+            },
+          ],
+        },
+      ],
+    },
+    cache: {
+      type: 'filesystem',
+    },
+    plugins: [
+      new HTMLWebpackPlugin({
+        template: resolveApp('index.html'),
+      }),
     ],
-  },
-  cache: {
-    type: 'filesystem',
-  },
-  plugins: [
-    new HTMLWebpackPlugin({
-      template: resolveApp('index.html'),
-    }),
-  ]
-} as Configuration;
+  } as Configuration;
+}
