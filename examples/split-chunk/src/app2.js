@@ -1,3 +1,4 @@
+import { flatten } from "lodash-es";
 import { getDoneTodos, finish, doneId } from "./done";
 import { createTodo } from "./create";
 import { getActiveTodos } from "./active";
@@ -8,3 +9,5 @@ const activeTodos = getActiveTodos();
 finish(activeTodos[0].title);
 log(doneId.id++);
 log(JSON.stringify(getDoneTodos()));
+
+log(flatten([[1], [2]]).join(' '));

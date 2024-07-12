@@ -1,1 +1,1 @@
-# Dive into webpack
+# Dive into webpack 5
