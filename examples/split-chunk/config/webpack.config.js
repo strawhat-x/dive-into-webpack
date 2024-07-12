@@ -44,6 +44,7 @@ export default {
     new BundleAnalyzerPlugin()
   ],
   optimization: {
+    moduleIds: 'deterministic',
     minimize: false,
     runtimeChunk: 'single',
     splitChunks: {
