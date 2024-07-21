@@ -1,20 +1,22 @@
 import { realpathSync } from 'node:fs';
 import path from 'node:path';
 
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 
 const appDir = realpathSync(process.cwd());
-const resolveApp = (relativePath) => path.resolve(appDir, relativePath);
+const resolveApp = (relative) => path.resolve(appDir, relative);
 
 export default {
   entry: resolveApp('src/index.js'),
   output: {
-    clean: true,
+    clean: {
+      keep: (asset) => !asset.endsWith('umd.js'),
+    },
     path: resolveApp('dist'),
     filename: '[name].[contenthash:8].umd.js',
     globalObject: 'this',
     library: {
-      name: 'hell-world',
+      name: 'MyLibrary',
       type: 'umd',
     },
   },
@@ -23,10 +25,7 @@ export default {
       commonjs: 'lodash-es',
       commonjs2: 'lodash-es',
       amd: 'lodash-es',
-      root: '_'
+      root: '_',
     }
-  },
-  optimization: {
-    minimize: false,
   }
 };
